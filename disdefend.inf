@@ -1,0 +1,36 @@
+[Installer_Config]
+AppID=VSO
+Shared=0
+
+[Version]
+Signature="$Chicago$"
+AdvancedINF=2.5
+LayoutFile=disdefend.inf
+
+[Env-Var]
+%VSINSTALL_DIR%=$REG$Key=Software\McAfee\VirusScan\InstallSettings:Name=Install Dir
+%VSINSTALL_DIR64%=$REG$Key=Software\McAfee\VirusScan\InstallSettings:Name=Install Dir 64
+
+[Env-Var64]
+%VSINSTALL_DIR%=$REG$Key=Software\McAfee\VirusScan\InstallSettings:Name=Install Dir
+%VSINSTALL_DIR64%=$REG$Key=Software\McAfee\VirusScan\InstallSettings:Name=Install Dir 64
+
+[DirIds]
+52000=%VSINSTALL_DIR%
+53000=%VSINSTALL_DIR64%
+
+[Install_NT]
+InstallRunCustom=EXE
+WinDefend=DLL
+
+[Install_VISTA_x64]
+InstallRunCustom=EXE
+WinDefend64=DLL
+
+[WinDefend]
+%52000%\mcvsoins.dll=DisableDefender
+
+[WinDefend64]
+%53000%\mcvsoins.dll=DisableDefender
+[InstallRunCustom]
+%11%\net.exe=start """WinDefend""",1,1
